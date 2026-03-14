@@ -1,7 +1,8 @@
-ROOT=/Users/fanyunchuan/Documents/1、樊云川/9、ai项目/lovme-os-github/loveme.os CODE_HOME=
-total 16
-drwxr-xr-x  5 fanyunchuan  staff   160 Mar 14 13:49 .
+ROOT=/Users/fanyunchuan/Documents/1、樊云川/9、ai项目/lovme-os-github/loveme.os CODE_HOME=./server
+发现代码在 ./server，正在强制搬家到根目录...
+total 24
+drwxr-xr-x  5 fanyunchuan  staff   160 Mar 14 13:51 .
 drwxr-xr-x  9 fanyunchuan  staff   288 Mar 14 13:41 ..
--rwxr-xr-x  1 fanyunchuan  staff  1892 Mar 14 13:49 flatten-and-push.sh
--rw-r--r--  1 fanyunchuan  staff    98 Mar 14 13:49 flatten-debug.log
-drwxr-xr-x  3 fanyunchuan  staff    96 Mar 14 13:41 server
+-rwxr-xr-x  1 fanyunchuan  staff  1850 Mar 14 13:50 flatten-and-push.sh
+-rw-r--r--  1 fanyunchuan  staff   167 Mar 14 13:51 flatten-debug.log
+-rw-r--r--  1 fanyunchuan  staff   918 Mar 14 13:41 recover-and-push.sh

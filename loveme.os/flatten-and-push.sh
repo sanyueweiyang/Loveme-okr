@@ -8,8 +8,8 @@ if [ ! -d "server" ] && [ -f "package.json" ] && [ -d "src" ]; then
   cd .. && ROOT="$(pwd)" && cd "$ROOT"
 fi
 
-# 优先选子目录里的 package.json；若存在 server/package.json 则强制用 server
-if [ -f "./server/package.json" ]; then
+# 强制：若有 server 目录则视为代码目录并搬至根
+if [ -d "server" ]; then
   CODE_HOME="./server"
 else
   CODE_HOME=$(find . -name "package.json" -not -path "*/node_modules/*" | while read f; do
