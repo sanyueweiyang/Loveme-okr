@@ -4,10 +4,14 @@ set -e
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
 
-# 优先选“子目录”里的 package.json（避免根目录已有 package.json 时误判）
-CODE_HOME=$(find . -name "package.json" -not -path "*/node_modules/*" | while read f; do
-  d=$(dirname "$f"); [ "$d" != "." ] && echo "$d" && break
-done | head -n 1)
+# 优先选子目录里的 package.json；若存在 server/package.json 则强制用 server
+if [ -f "./server/package.json" ]; then
+  CODE_HOME="./server"
+else
+  CODE_HOME=$(find . -name "package.json" -not -path "*/node_modules/*" | while read f; do
+    d=$(dirname "$f"); [ "$d" != "." ] && echo "$d" && break
+  done | head -n 1)
+fi
 
 if [ -n "$CODE_HOME" ] && [ "$CODE_HOME" != "." ]; then
     echo "发现代码在 $CODE_HOME，正在强制搬家到根目录..."
