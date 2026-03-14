@@ -17,9 +17,11 @@ else
   done | head -n 1)
 fi
 
+DEBUG_LOG="$ROOT/flatten-debug.log"
+echo "ROOT=$ROOT CODE_HOME=$CODE_HOME" > "$DEBUG_LOG"
 if [ -n "$CODE_HOME" ] && [ "$CODE_HOME" != "." ]; then
-    echo "发现代码在 $CODE_HOME，正在强制搬家到根目录..."
-    mv "$CODE_HOME"/* . 2>/dev/null || true
+    echo "发现代码在 $CODE_HOME，正在强制搬家到根目录..." | tee -a "$DEBUG_LOG"
+    mv "$CODE_HOME"/* . 2>>"$DEBUG_LOG" || true
     # 只移动隐藏文件，排除 . 和 ..
     for f in "$CODE_HOME"/.[!.]*; do
         [ -e "$f" ] && mv "$f" . 2>/dev/null || true
@@ -29,6 +31,7 @@ if [ -n "$CODE_HOME" ] && [ "$CODE_HOME" != "." ]; then
     [ -f "$CODE_HOME/zbpack.json" ] && cp "$CODE_HOME/zbpack.json" . 2>/dev/null || true
     rm -rf "$CODE_HOME"
 fi
+ls -la >> "$DEBUG_LOG" 2>&1
 
 if [ ! -f "Dockerfile" ]; then
     echo "警告：根目录依然没有 Dockerfile！正在全盘深挖..."
