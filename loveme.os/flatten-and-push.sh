@@ -24,6 +24,9 @@ if [ -n "$CODE_HOME" ] && [ "$CODE_HOME" != "." ]; then
     for f in "$CODE_HOME"/.[!.]*; do
         [ -e "$f" ] && mv "$f" . 2>/dev/null || true
     done
+    # 确保 Dockerfile / zbpack.json 一定在根目录
+    [ -f "$CODE_HOME/Dockerfile" ] && cp "$CODE_HOME/Dockerfile" . 2>/dev/null || true
+    [ -f "$CODE_HOME/zbpack.json" ] && cp "$CODE_HOME/zbpack.json" . 2>/dev/null || true
     rm -rf "$CODE_HOME"
 fi
 
