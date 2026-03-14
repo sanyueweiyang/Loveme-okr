@@ -3,6 +3,10 @@
 set -e
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
+# 若当前目录没有 server 子目录但有 package.json，说明可能在 server 里，先回到上级
+if [ ! -d "server" ] && [ -f "package.json" ] && [ -d "src" ]; then
+  cd .. && ROOT="$(pwd)" && cd "$ROOT"
+fi
 
 # 优先选子目录里的 package.json；若存在 server/package.json 则强制用 server
 if [ -f "./server/package.json" ]; then
